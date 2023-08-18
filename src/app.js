@@ -24,16 +24,16 @@ const openai = new OpenAIApi(configuration)
 
 app.post("/signup", async (req, res) => {
     try {
+        
         const user = await User.findOne({ email: req.body.email })
         if (user) {
-            res.status(409).send({status:409,message:"User Already Registered"})
+            res.status(409).send({ status: 409, message: "User Already Registered" })
         }
         else {
             let data = new User(req.body);
-        
-        data = await data.save();
-        // console.log(data)
-        res.status(201).send({ status: 201, data })
+            data = await data.save();
+            // console.log(data)
+            res.status(201).send({ status: 201, data })
         }
 
     } catch (e) {
@@ -107,7 +107,7 @@ app.get("/getblogs", async (req, res) => {
 app.get("/getuser", async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.query.id });
-        res.status(200).send({status:200,user})
+        res.status(200).send({ status: 200, user })
     } catch (error) {
         console.log(e)
     }
@@ -120,12 +120,12 @@ app.post('/message', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             message: req.body.message,
-            ref:user._id
+            ref: user._id
         })
         let data = await message.save()
-        res.status(200).send({status:200,message:"hi"})
+        res.status(200).send({ status: 200, message: "hi" })
     } catch (e) {
-        res.status(500).send({status:500,message:"bad server"})
+        res.status(500).send({ status: 500, message: "bad server" })
     }
 })
 
