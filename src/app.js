@@ -6,14 +6,18 @@ const { Configuration, OpenAIApi } = require("openai")
 const User = require("./model/user")
 const bcryptjs = require("bcryptjs")
 const Message = require("./model/message")
-
+let corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+    methods: "GET, PATCH, DELETE, POST"
+}
 
 require("./dbconn/connection")
 
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }))
-
+app.use(cors(corsOptions));
 // console.log(process.env.KEY)
 
 const configuration = new Configuration({
