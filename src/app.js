@@ -15,7 +15,6 @@ let corsOptions = {
 require("./dbconn/connection")
 
 app.use(express.json());
-app.use(cors());
 app.use(express.urlencoded({ extended: false }))
 app.use(cors(corsOptions));
 // console.log(process.env.KEY)
