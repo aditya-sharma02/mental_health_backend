@@ -2,7 +2,6 @@ require("dotenv").config({path:"../.env"});
 const express = require("express")
 const app = express()
 const cors = require("cors");
-const { Configuration, OpenAIApi } = require("openai")
 const User = require("./model/user")
 const bcryptjs = require("bcryptjs")
 const Message = require("./model/message")
@@ -18,12 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(cors(corsOptions));
 // console.log(process.env.KEY)
-
-const configuration = new Configuration({
-    apiKey: process.env.KEY
-})
-
-const openai = new OpenAIApi(configuration)
 
 app.post("/signup", async (req, res) => {
     try {
@@ -61,7 +54,7 @@ app.post("/login", async (req, res) => {
     } catch (e) {
         console.log("123")
         console.log(e)
-        res.status(400).send({ status: "bad", message: "sign up failed !!!" })
+        res.status(400).send({ status: "bad", message: "login failed !!!" })
     }
 })
 
